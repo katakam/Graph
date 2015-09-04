@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Juniper Search</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+     <!-- D3JS Core JS library -->
+    <script src="js/d3.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+/*Style required for D3JS*/
+.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override this later */
+    background-color: teal;
+}
+</style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <img src="img/jnpr.png" href="https://www.juniper.net" height="10%" width="10%"/> -->
+          <a class="navbar-brand" href="https://www.juniper.net"> <img src="img/jnpr.png" height="50px" width=auto/></a> 
+        </div>
+      <div class="container" >
+        
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active text-center"><a href="#">Home</a></li>
+            <li class="text-center"><a href="sr.html">Service Requests</a></li>
+            <li class="text-center"><a href="pr.html">Problem Reports</a></li>
+            <li class="text-center"><a href="kb.html">Knowledge Base</a></li>
+            <li class="text-center"><a href="help.html">Help</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+          
+   
+        <div id="wrapper-container">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Search for Problem Reports and Service Requests!</h1>
+                        <div class="well">
+                            <p>
+                               Things that can be searched:
+                            <ol>
+                                <li>Search for PR using ID</li>
+                                <li>Search for SR using case id.</li>
+                                <li>Search for PR or SR using keywords.</li>
+                                <li>Search for PR and SR using multiple attributes without having to enter the IDS.</li>
+                            </ol>
+                            </p>
+                        </div>
+
+<!--                        <h1>Simple animations using D3JS</h1>
+                        <div class="well">
+                            <p>
+                                Things to do : 
+                                <ol>
+                                    <li>Basic animations and transitions using d3js</li>
+                                    <li>Basic graph in d3js</li>
+                                    <li>Transition in graph using d3js</li>
+                                </ol>
+                            </p>
+                        </div>
+                        <h3>1. But first try out an SVG.</h3>
+                        <svg width="50" height="50">
+                            <circle cx="25" cy="25" r="22"
+                             fill="#61aacc" stroke="#54b1c9" stroke-width="2"/>
+                        </svg>
+                        <hr>
+
+                        <h3>2. Bar Graph</h3>
+                        <div id="bar-graph"></div>
+                        <hr>
+
+                        <h3>3. SVG Primers</h3>
+                        <div>
+                            <svg width="500" height="50">
+                                <circle cx = "250px" cy="25px" r="25px" fill="yellow" stroke="orange" stroke-width="2px"/>
+                                <rect x="0px" y = "12.5px" width="100px" height="25px"/>
+                                <line x1="0" y1="0" x2="500" y2="50" stroke="blue"/>
+                            </svg>
+                        </div>-->
+                        <hr>
+
+
+                    
+
+
+                        <script>
+                            // My d3js script be here.
+                            var dataset = [];                        //Initialize empty array
+                            for (var i = 0; i < 25; i++) {           //Loop 25 times
+                                var newNumber = Math.random() * 30;  //New random number (0-30)
+                                dataset.push(newNumber);             //Add new number to array
+                            }
+
+                            // Bar Graph
+                            d3.select("#bar-graph").selectAll("div")
+                            .data(dataset)
+                            .enter()
+                            .append("div")
+                            .attr("class", "bar")
+                            .style("height", function(d){
+                                var height = d * 5;
+                                return height+"px";
+                            })
+                            .style("margin-right", function(d){
+                                return "2px";
+                            })
+                            .attr("id", function(d){
+                                return "hey"+ Math.floor(d);
+                            });
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+   
+
+</body>
+</html>

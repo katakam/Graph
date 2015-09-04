@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/rtejasvi/Documents/NetBeansProjects/TitanSpring/TitanSpring/src/main/java/net/juniper/titan/gsafeed.xsd" uri="src/main/resources/jaxb/gsafeed/gsafeed.xsd"/>
+</catalog>

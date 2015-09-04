@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Juniper Search</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <img src="img/jnpr.png" href="https://www.juniper.net" height="10%" width="10%"/> -->
+          <a class="navbar-brand" href="https://www.juniper.net"> <img src="img/jnpr.png" height="50px" width=auto/></a> 
+        </div>
+      <div class="container" >
+        
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="text-center"><a href="index.html">Home</a></li>
+            <li class="text-center"><a href="sr.html">Service Requests</a></li>
+            <li class="active text-center"><a href="#">Problem Reports</a></li>
+            <li class="text-center"><a href="kb.html">Knowledge Base</a></li>
+            <li class="text-center"><a href="help.html">Help</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+   
+    
+
+       
+        <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <form >
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="checkbox" value="Multi Query Search" aria-label="...">
+                            Multi Query Search
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputId">PR ID</label>
+                        <input type="text" class="form-control" id="inputId" placeholder="Enter case id">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputKey">Key words</label>
+                        <input type="text" class="form-control" id="inputKey" placeholder="Keywords">
+                        <p class="help-block">Enter the keywords you want to search for</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPlatform">Platform</label>
+                        <input type="text" class="form-control" id="inputPlatform" placeholder="Enter platform">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRelease">Functional Area</label>
+                        <input type="text" class="form-control" id="inputRelease" placeholder="Enter Functional Area">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSeries">Problem Level</label>
+                        <input type="text" class="form-control" id="inputSeries" placeholder="Enter Problem Level">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPriority">Submitter Id</label>
+                        <input type="text" class="form-control" id="inputPriority" placeholder="Enter Submitter ID">
+                    </div>
+
+                    <button type="button" class="btn btn-primary center-block" onclick="searchChooser();">Submit</button>
+                </form>
+            </ul>
+        </div>
+
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <a href="#menu-toggler" class="btn btn-info toggler left" id="menu-toggler" ></a>     
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Problem Report Search</h1>
+                        <p>Enter the attributes on the left to search for a Problem Report.</p>
+                        <hr/>
+                        <div id="result">Search Results.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        
+        
+    $("#menu-toggler").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        
+        if($("#menu-toggler").hasClass("left")){
+            $("#menu-toggler").addClass("right");
+            $("#menu-toggler").removeClass("left");
+        }
+        else{
+            $("#menu-toggler").addClass("left");
+            $("#menu-toggler").removeClass("right");
+        }
+       
+    });
+    
+    function getUrlParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        if(sURLVariables.length<1){
+            return null;
+        }
+        for (var i = 0; i < sURLVariables.length; i++) 
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) 
+            {
+                return sParameterName[1];
+            }
+        }
+    }  
+    
+    function fireOnLoad(){
+        var pr_id = getUrlParameter("pr_id"); 
+        if(typeof pr_id!=='undefined'){
+            var url = "/TitanSpring-1/search_ind.htm?type=pr&";
+            url+="id="+pr_id;
+            console.log(url);
+
+  
+           $.get( url, function( data ) {
+               console.log(data);
+               $( "#result" ).html( data );
+              
+           });
+        }
+    }
+    $( document ).ready(fireOnLoad());
+    
+    function searchChooser(){
+        if($('#checkbox').is(":checked")){
+            multiSearch();
+        }
+        else{
+           search(); 
+        }
+    }
+    function search(){
+        
+       var url = "/TitanSpring-1/search_ind.htm?type=pr";
+        var pr_id = $('#inputId').val();
+        var keywords = $('#inputKey').val();
+        if(pr_id !== ""){
+            console.log(typeof pr_id);
+            console.log(pr_id);
+            url+="&id="+$('#inputId').val();
+        }
+        else if(keywords !== ""){
+            url+="&keyw="+$('#inputKey').val();
+        }
+        
+        console.log(url);
+
+        $.get( url, function( data ) {
+            console.log(data);
+            $( "#result" ).html( data );
+            
+        });
+    }
+    
+    function multiSearch(){
+        var url = "/TitanSpring-1/search.htm?";
+        var inputPlatform = $('#inputPlatform').val();
+        var inputRelease = $('#inputRelease').val();
+        var inputSeries = $('#inputSeries').val();
+        var inputPriority = $('#inputPriority').val();
+        
+        url+="type=pr";
+        if(inputPlatform !==""){
+            console.log(inputPlatform);
+            url+="&pf="+inputPlatform;
+        }
+        if(inputRelease !==""){
+            console.log(inputRelease);
+            url+="&re="+inputRelease;
+        }
+        if(inputSeries !==""){
+            console.log(inputSeries);
+            url+="&se="+inputSeries;
+        }
+        if(inputPriority !==""){
+            console.log(inputPriority);
+            url+="&pr="+inputPriority;
+        }
+        
+        console.log(url);
+
+        $.get( url, function( data ) {
+            console.log(data);
+            $( "#result" ).html( data );
+            
+        });
+    }
+    
+    </script>
+
+ 
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Mon Jun 01 2015 12:02:40 GMT+0530 (India Standard Time) -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+         <xs:element name="gsafeed">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="header">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="datasource" type="xs:string"></xs:element>
+                                             <xs:element name="feedtype" type="xs:string"></xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                           <xs:element name="group">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="record" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="metadata">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="meta" maxOccurs="unbounded">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="content" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="encoding" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="content">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="encoding" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                         <xs:attribute name="action" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="crawl-once" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="lock" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="mimetype" type="xs:string"></xs:attribute>
+                                                         <xs:attribute name="url" type="xs:string"></xs:attribute>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>
